@@ -106,11 +106,7 @@ const secured = function (req, res, next) {
 
 // Defined routes
 app.use('/poems', require('./lib/poem'));
-
-
-app.get('/', function(req, res) {
-	res.render('homepage', { title: 'Home'});
-})
+app.use('/', require('./lib/homepage'));
 
 
 /**

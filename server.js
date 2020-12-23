@@ -14,7 +14,7 @@ const expressSession = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 require('dotenv').config();
-const authRouter = require('./lib/auth/auth')
+const authRouter = require('./lib/auth')
 
 
 /**
@@ -105,7 +105,12 @@ const secured = function (req, res, next) {
 }
 
 // Defined routes
-app.use('/', require('./lib/homepage/homepage'));
+app.use('/poems', require('./lib/poem'));
+
+
+app.get('/', function(req, res) {
+	res.render('homepage', { title: 'Home'});
+})
 
 
 /**

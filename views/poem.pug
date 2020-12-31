@@ -1,25 +1,24 @@
 extends layout
 
 block layout-content
-		// Page Header
-		header.masthead()
-			.overlay
-			.container
-				.row
-					.col-lg-8.col-md-10.mx-auto
-						.post-heading
-							h1 
-								= post.title
-							span.meta
-								| Posted by 
-								a(href="#")
-									= post.author
-								= ' on ' + post.date
-		// Post Content
-		article
-			.container
-				.row
-					.col-lg-8.col-md-10.mx-auto
-						p
-							= post.text
-		hr
+	// Page Header
+	header.masthead
+		.overlay
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					.post-heading
+						h1 
+							= post.title
+						span.meta
+							| Posted by 
+							a(href="")
+								= post.author
+							= ' on ' + post.date
+	// Post Content
+	article
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					p
+						= post.text

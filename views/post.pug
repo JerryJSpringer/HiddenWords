@@ -1,0 +1,49 @@
+extends layout
+
+block header-content
+	// Submit script
+	script.
+		$(document).ready(function() {
+			$('#post-form').on('submit', function(event) {
+				// Form submit manually
+				event.preventDefault();
+
+				$.ajax({
+					url: '/post',
+					type: 'POST',
+					 headers: {
+						'Authorization':'Bearer ' + document.cookie,
+						'Content-Type':'application/json'
+					},
+					success: function(data) {
+						alert(data);
+					}
+				});
+			});
+		});
+
+block layout-content
+	// Page Header
+	header.masthead
+		.overlay
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					.site-heading
+						h1 
+							| Hidden Words
+						span.subheading 
+							| Sign up and start sharing
+	.container
+		.row
+			.col-lg-8.col-md-10.mx-auto
+				form#post-form(action="" method="POST")
+					label(for="title") Title
+					br
+					input#title(type="text" name="title")
+					br
+					label(for="text-content") Post
+					br
+					input#text-content(type="text" name="text-content")
+					br
+					input#post-button(type="submit" name="post-button" value="Submit")

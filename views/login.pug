@@ -1,0 +1,52 @@
+extends layout
+
+block header-content
+	// Submit script
+	script.
+		$(document).ready(function() {
+			$('#login-form').on('submit', function(event) {
+				// Form submit manually
+				event.preventDefault();
+
+				var user = $('#username').val();
+				var password = $('#password').val();
+
+				$.post('/login', 
+					{
+						username: user,
+						password: password
+					}, 
+					function(data) {
+						document.cookie = data;
+						alert(document.cookie);
+						window.location.replace("/");
+					}, 'json'
+				);
+			});
+		});
+
+block layout-content
+	// Page Header
+	header.masthead
+		.overlay
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					.site-heading
+						h1 
+							| Hidden Words
+						span.subheading 
+							| Log in and start sharing
+	.container
+		.row
+			.col-lg-8.col-md-10.mx-auto
+				form#login-form(action="" method="POST")
+					label(for="username") Username
+					br
+					input#username(type="text" name="username")
+					br
+					label(for="password") Password
+					br
+					input#password(type="text" name="password")
+					br
+					input#login-button(type="submit" name="login-button" value="Submit")

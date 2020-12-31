@@ -1,0 +1,56 @@
+extends layout
+
+block header-content
+	// Submit script
+	script.
+		$(document).ready(function() {
+			$('#register-form').on('submit', function(event) {
+				// Form submit manually
+				event.preventDefault();
+
+				var user = $('#username').val();
+				var password = $('#password').val();
+				var passwordretype = $('#password-retype').val();
+
+				if (password === passwordretype) {
+					$.post('/register', {username: user}, function() {
+						alert("posted");
+						window.location.replace("/login");
+					}, 'json');
+				}
+			});
+		});
+
+block layout-content
+	// Page Header
+	header.masthead
+		.overlay
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					.site-heading
+						h1 
+							| Hidden Words
+						span.subheading 
+							| Sign up and start sharing
+	.container
+		.row
+			.col-lg-8.col-md-10.mx-auto
+				form#register-form(action="" method="POST")
+					label(for="email") Email
+					br
+					input#email(type="text" name="email")
+					br
+					label(for="username") Username
+					br
+					input#username(type="text" name="username")
+					br
+					label(for="password") Password
+					br
+					input#password(type="text" name="password")
+					br
+					label(for="password-retype") Confirm Password
+					br
+					input#password-retype(type="text" name="password-retype")
+					br
+					input#register-button(type="submit" name="register-button" value="Submit")

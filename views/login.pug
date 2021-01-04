@@ -8,17 +8,16 @@ block header-content
 				// Form submit manually
 				event.preventDefault();
 
-				var user = $('#username').val();
+				var email = $('#email').val();
 				var password = $('#password').val();
 
 				$.post('/login', 
 					{
-						username: user,
+						email: email,
 						password: password
 					}, 
 					function(data) {
 						document.cookie = data;
-						alert(document.cookie);
 						window.location.replace("/");
 					}, 'json'
 				);
@@ -41,9 +40,9 @@ block layout-content
 		.row
 			.col-lg-8.col-md-10.mx-auto
 				form#login-form(action="" method="POST")
-					label(for="username") Username
+					label(for="email") Email
 					br
-					input#username(type="text" name="username")
+					input#email(type="text" name="email")
 					br
 					label(for="password") Password
 					br

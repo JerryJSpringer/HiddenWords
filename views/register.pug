@@ -8,14 +8,19 @@ block header-content
 				// Form submit manually
 				event.preventDefault();
 
+				var email = $('#email').val();
 				var user = $('#username').val();
 				var password = $('#password').val();
 				var passwordretype = $('#password-retype').val();
 
 				if (password === passwordretype) {
-					$.post('/register', {username: user}, function() {
-						alert("posted");
-						window.location.replace("/login");
+					$.post('/register', 
+						{
+							email: email,
+							username: user,
+							password: password
+						}, function() {
+							window.location.replace("/login");
 					}, 'json');
 				}
 			});

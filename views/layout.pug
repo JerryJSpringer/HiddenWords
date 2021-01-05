@@ -17,6 +17,34 @@ html(lang="en")
 		link(href="css/clean-blog.min.css" rel="stylesheet")
 		// jQuery
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+		script.
+			$(document).ready(function() {
+				$.post('/auth', 
+					{
+						token: document.cookie
+					}, 
+					function(data) {
+						var items;
+						if (JSON.parse(data).success) {
+							items = 
+							[
+								{ link: '/post', title: 'Post' },
+								{ link: '/logout', title: 'Logout' }
+							];
+						} else {
+							items = 
+							[
+								{ link: '/login', title: 'Login' },
+								{ link: '/register', title: 'Register' }
+							];
+						}
+
+						items.forEach(function(item, index) {
+							$('#navbarItems').append('<li class="nav-item"><a class="nav-link" href=' + item.link +'>' + item.title + '</a>');
+						});
+					}, 'json'
+				);
+			});
 		block header-content
 	body
 		// Navigation
@@ -27,21 +55,7 @@ html(lang="en")
 					| 
 					i.fas.fa-bars
 				#navbarResponsive.collapse.navbar-collapse
-					ul.navbar-nav.ml-auto
-						li.nav-item
-							a.nav-link(href="about.html") About
-						li.nav-item
-							a.nav-link(href="/post") Post
-						li.nav-item
-							a.nav-link(href="contact.html") Contact
-						if isAuthenticated
-							li.nav-item
-								a.nav-link(href="/logout") Logout
-						else
-							li.nav-item
-								a.nav-link(href="/login") Login
-							li.nav-item
-								a.nav-link(href="/register") Register
+					ul#navbarItems.navbar-nav.ml-auto
 		div#root
 			block layout-content
 			hr

@@ -6,25 +6,16 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || '3000';
 
-// Express session
-const session = require('express-session');
-
 // Path
 const path = require('path');
 
-// Auth
+// Process evn
 const dotenv = require('dotenv');
 dotenv.config();
 
 // Body parser
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-/**
- * Middleware
- */
-// Auth middleware
-const auth = require('./lib/utilities/auth');
 
 
 /**
@@ -47,6 +38,8 @@ app.use('/js', express.static(path.join(__dirname, 'public/js')));
 /**
  * Route definitions
  */
+app.use('/auth', require('./lib/auth'));
+app.use('/logout', require('./lib/logout'));
 app.use('/login', require('./lib/login'));
 app.use('/register', require('./lib/register'));
 app.use('/post', require('./lib/post'));

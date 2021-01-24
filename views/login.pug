@@ -1,4 +1,4 @@
-extends layout
+extends unauthlayout
 
 block header-content
 	// Submit script
@@ -16,7 +16,7 @@ block header-content
 						email: email,
 						password: password
 					}, 
-					function(data) {
+					function (data) {
 						document.cookie = data;
 						window.location.replace("/");
 					}, 'json'

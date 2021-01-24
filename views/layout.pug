@@ -17,6 +17,7 @@ html(lang="en")
 		link(href="css/clean-blog.min.css" rel="stylesheet")
 		// jQuery
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+		block auth-content
 		script.
 			$(document).ready(function() {
 				$.post('/auth', 
@@ -25,7 +26,7 @@ html(lang="en")
 					}, 
 					function(data) {
 						var items;
-						if (JSON.parse(data).success) {
+						if (data.success) {
 							items = 
 							[
 								{ link: '/post', title: 'Post' },
@@ -40,7 +41,7 @@ html(lang="en")
 						}
 
 						items.forEach(function(item, index) {
-							$('#navbarItems').append('<li class="nav-item"><a class="nav-link" href=' + item.link +'>' + item.title + '</a>');
+							$('#navbarItems').append('<li class="nav-item"><a class="nav-link"' + ' href=' + item.link +  '>' + item.title + '</a></li>');
 						});
 					}, 'json'
 				);

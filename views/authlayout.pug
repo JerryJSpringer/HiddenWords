@@ -1,0 +1,16 @@
+extends layout
+
+block auth-content
+	script.
+		$(document).ready(function() {
+			$.post('/auth', 
+				{
+					token: document.cookie
+				}, 
+				function(data) {
+					if (!data.success) {
+						window.location.href = '/login';
+					}
+				}, 'json'
+			);
+		});

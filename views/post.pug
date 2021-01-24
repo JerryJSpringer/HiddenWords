@@ -1,4 +1,4 @@
-extends layout
+extends authlayout
 
 block header-content
 	// Submit script
@@ -8,19 +8,37 @@ block header-content
 				// Form submit manually
 				event.preventDefault();
 
+				var title = $('#title').val();
+				var content = $('#text-content').val();
+
 				$.ajax({
 					url: '/post',
 					type: 'POST',
-					 headers: {
+					headers: {
 						'Authorization':'Bearer ' + document.cookie,
-						'Content-Type':'application/json'
 					},
-					success: function(data) {
-						alert(data);
+					contentType: 'application/json',
+					data: JSON.stringify({
+						title: title,
+						content: content
+					}),
+					dataType: 'json',
+					success: function (data) {
+						window.location.replace("/");
+					},
+					error: function (err) {
+						alert(err.message);
 					}
 				});
 			});
 		});
+
+	// Textarea size
+	script.
+		function resize(element) {
+			element.style.height = "auto";
+			element.style.height = (element.scrollHeight)+"px";
+		}
 
 block layout-content
 	// Page Header
@@ -33,17 +51,13 @@ block layout-content
 						h1 
 							| Hidden Words
 						span.subheading 
-							| Sign up and start sharing
+							| Start writing and start sharing!
 	.container
 		.row
-			.col-lg-8.col-md-10.mx-auto
+			.col-lg-auto.col-md-auto.mx-auto
 				form#post-form(action="" method="POST")
-					label(for="title") Title
+					textarea#title(type="text" name="title" placeholder="Title" rows=1 cols=40 oninput="resize(this)")
 					br
-					input#title(type="text" name="title")
-					br
-					label(for="text-content") Post
-					br
-					input#text-content(type="text" name="text-content")
+					textarea#text-content(type="text" name="text-content" placeholder="Write your poem here" rows=15 cols=40 oninput="resize(this)")
 					br
 					input#post-button(type="submit" name="post-button" value="Submit")

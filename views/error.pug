@@ -1,0 +1,28 @@
+extends layout
+
+block layout-content
+	// Page Header
+	header.masthead
+		.overlay
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					.post-heading
+						h1 
+							| 404 Page Not Found
+						span.meta
+							| Posted by 
+							a(href="")
+								| Computer
+	// Post Content
+	article
+		.container
+			.row
+				.col-lg-auto.col-md-auto.mx-auto
+					p
+						| Sorry this page
+						| Could not be found
+						| Maybe you should try
+						| Starting over
+			.clearfix
+					a.btn.btn-primary.float-right(href="/") Home →	

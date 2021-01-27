@@ -11,14 +11,13 @@ block layout-content
 						h1 
 							= post.title
 						span.meta
-							| Posted by 
-							a(href="")
+							| Posted #{post.postDate} by 
+							a(href="/user/" + post.authorId + "/" + post.author)
 								= post.author
-							= ' on ' + post.date
 	// Post Content
 	article
 		.container
 			.row
-				.col-lg-auto.col-md-auto.mx-auto
+				.col-lg-8.col-md-10.mx-auto
 					p
-						= post.text
+						= post.content

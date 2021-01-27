@@ -45,6 +45,7 @@ app.use('/register', require('./lib/register'));
 app.use('/post', require('./lib/post'));
 app.use('/poems', require('./lib/poem'));
 app.use('/', require('./lib/homepage'));
+app.use('*', require('./lib/error'))
 
 /**
  * Launch server

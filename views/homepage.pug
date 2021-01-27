@@ -18,16 +18,15 @@ block layout-content
 			.col-lg-8.col-md-10.mx-auto
 				each post in posts
 					.post-preview
-						a(href="/poems")
+						a(href="/poems/" + post.postId + "/" + post.link)
 							h2.post-title
 								= post.title
 							h5.post-subtitle
 								= post.preview
 						p.post-meta
-							| Posted by 
-							a(href="/u/" + post.authorId + "/" + post.author) 
+							| Posted #{post.postDate} by 
+							a(href="/user/" + post.authorId + "/" + post.author) 
 								= post.author
-							= ' on ' +  post.postDate
 					hr
 				// Pager
 				.clearfix

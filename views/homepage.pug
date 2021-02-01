@@ -1,6 +1,6 @@
-extends layout
+extends postlayout
 
-block layout-content
+block pre-post-content
 	// Page Header
 	header.masthead
 		.overlay
@@ -12,28 +12,3 @@ block layout-content
 							| Hidden Words
 						span.subheading 
 							| A poetry sharing community
-	// Main Content
-	.container
-		.row
-			.col-lg-8.col-md-10.mx-auto
-				each post in posts
-					.post-preview
-						a(href="/poems/" + post.postId + "/" + post.link)
-							h2.post-title
-								= post.title
-							h5.post-subtitle
-								= post.preview
-						p.post-meta
-							| Posted #{post.postDate} by 
-							a(href="/user/" + post.authorId + "/" + post.author) 
-								= post.author
-					hr
-				// Pager
-				.clearfix
-					if (extra)
-						a.btn.btn-primary.float-right(href="/?page=" + (parseInt(page) + 1)) Older Posts →	
-					if (page == 1)
-						a.btn.btn-primary.float-light(href="/") ← Newer Posts
-					else if (page > 0)
-						a.btn.btn-primary.float-light(href="/?page=" + (parseInt(page) - 1)) ← Newer Posts
-						

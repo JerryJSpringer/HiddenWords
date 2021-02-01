@@ -1,0 +1,32 @@
+extends layout
+
+block layout-content
+	block pre-post-content
+	// Main Content
+	.container
+		.row
+			.col-lg-8.col-md-10.mx-auto
+				- var num = 0;
+				each post in posts
+					- num += 1;
+					.post-preview
+						a(href="/poems/" + post.postId + "/" + post.link)
+							h2.post-title
+								= post.title
+							h5.post-subtitle
+								= post.preview
+						p.post-meta
+							| Posted #{post.postDate} by 
+							a(href="/user/" + post.authorId + "/" + post.author) 
+								= post.author
+					if (extra || page)
+						hr
+				// Pager
+				.clearfix
+					if (extra)
+						a.btn.btn-primary.float-right(href="?page=" + (parseInt(page) + 1)) Older Posts →	
+					if (page == 1)
+						a.btn.btn-primary.float-light(href=url) ← Newer Posts
+					else if (page > 0)
+						a.btn.btn-primary.float-light(href="?page=" + (parseInt(page) - 1)) ← Newer Posts
+						
